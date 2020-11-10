@@ -3,8 +3,7 @@ var path = require('path')
 var data = require('./data/data.js')
 var wait = require('./data/waitinglist.js')
 var app = express()
-var port = 8080
-
+var port = process.env.port || 3001
 
 
 app.use(express.urlencoded({ extended : true}))
