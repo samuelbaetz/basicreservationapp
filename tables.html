@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yo, Aloha</title>
+    <style>
+        .header {
+            margin-top: 100px;
+        }
+        .title {
+            text-align: center;
+        }
+        .btn-primary {
+            margin-left: 380px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron header">
+            <h1 class="title">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-droplet-half" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+                    <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
+                  </svg>
+                Yo, Aloha Bar and Grill</h1>
+                <hr>
+                <a href="/views"><button type="button" class="btn btn-primary">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-table" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                      </svg>
+                    View Tables</button></a>
+                <a href="/reserve"><button type="button" class="btn btn-danger">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card-2-front-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+                      </svg>
+                    Make a Reservation</button></a>
+        </div>
+
+    </div>
+<div class="container place">
+<h2>Reservation List</h2>
+</div>
+<div class="container place2">
+    <h2>Waiting List</h2>
+</div>
+
+    <script>
+
+$.get('/tables',function(data){
+    console.log(data)
+    if(data){
+    for(i=0; i < data.length; i++) {
+     $('.place').append(`<div class="card">
+  <div class="card-body">
+    <h1>${i + 1}.</h1>
+    <h3>${data[i].name}</h3>
+    <h5>${data[i].phone}</h5>
+    <a href="mailto:${data[i].email}">${data[i].email}</a>
+  </div>
+</div>`)
+    }
+    }
+})
+
+$.get('/wait', function(data){
+    if(data){
+        for(i=0; i < data.length; i++) {
+     $('.place2').append(`<div class="card">
+  <div class="card-body">
+    <h1>${i + 1}.</h1>
+    <h3>${data[i].name}</h3>
+    <h5>${data[i].phone}</h5>
+    <a href="mailto:${data[i].email}">${data[i].email}</a>
+  </div>
+</div>`)
+    } 
+    }
+})
+    </script>
+</body>
+</html>
